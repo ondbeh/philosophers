@@ -6,18 +6,18 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:31:23 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 12:48:05 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:41:07 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-long	read_long(long *value, pthread_mutex_t *mutex)
+long	read_long(long value, pthread_mutex_t *mutex)
 {
 	long	tmp;
 
 	pthread_mutex_lock(mutex);
-	tmp = *value;
+	tmp = value;
 	pthread_mutex_unlock(mutex);
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:36:03 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 13:55:05 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:47:13 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_vars
 	pthread_mutex_t		eat_count_mutex[PHILOS_MAX];
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		is_finished_mutex;
+	pthread_mutex_t		start_time_mutex;
 	long					number_of_philosophers;
 	long					time_to_die;
 	long					time_to_eat;
@@ -56,7 +57,7 @@ int		exit_error(char *error_message);
 int		ft_atoi(const char *str);
 int		mutex_array_init(pthread_mutex_t *mutex_array, int size);
 int		mutex_array_destroy(pthread_mutex_t *mutex_array, int size);
-long	read_long(long *value, pthread_mutex_t *mutex);
+long	read_long(long value, pthread_mutex_t *mutex);
 void	write_long(long *value, long new_value, pthread_mutex_t *mutex);
 long	ft_getcurrenttime(void);
 void	ft_usleep(long time);

@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:35:06 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 14:21:06 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:04:22 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ int	initialize(t_vars *vars)
 		return (exit_error("Failed to initialize mutex"));
 	if (pthread_mutex_init(&vars->is_finished_mutex, NULL))
 		return (exit_error("Failed to initialize mutex"));
+	if (pthread_mutex_init(&vars->start_time_mutex, NULL))
+		return (exit_error("Failed to initialize mutex"));
 	initialize_vars(vars);
-
 	return (0);
 }
 
@@ -123,6 +124,7 @@ int	main(int argc, char **argv)
 	mutex_array_destroy(vars.eat_count_mutex, vars.number_of_philosophers);
 	pthread_mutex_destroy(&vars.print_mutex);
 	pthread_mutex_destroy(&vars.is_finished_mutex);
+	pthread_mutex_destroy(&vars.start_time_mutex);
 	printf("All philosophers have eaten enough times\n");
 
 	return (0);

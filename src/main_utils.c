@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:48:47 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 14:19:53 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/27 14:56:18 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_usleep(long time)
 	long	start_time;
 
 	start_time = ft_getcurrenttime();
-	while (ft_getcurrenttime() - start_time * 1000 < time)
+	while (ft_getcurrenttime() - start_time < time)
 		usleep(50);
 }
 
