@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:48:47 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 14:56:18 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:55:23 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_isdigit(int ch)
 	return (1);
 }
 
-long	ft_getcurrenttime(void)
+long	ft_gettime(void)
 {
 	struct timeval	time;
 
@@ -38,16 +38,16 @@ void	ft_usleep(long time)
 {
 	long	start_time;
 
-	start_time = ft_getcurrenttime();
-	while (ft_getcurrenttime() - start_time < time)
+	start_time = ft_gettime();
+	while (ft_gettime() - start_time < time)
 		usleep(50);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atol(const char *str)
 {
-	int	ret_int;
-	int	is_positive;
-	int	digit;
+	long	ret_int;
+	int		is_positive;
+	int		digit;
 
 	is_positive = 1;
 	ret_int = 0;

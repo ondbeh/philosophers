@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:36:03 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 10:01:51 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:55:45 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <sys/time.h>
 
 # define PHILOS_MAX 250
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "died"
 
 typedef struct s_vars	t_vars;
 typedef struct s_philo
@@ -54,12 +59,12 @@ typedef struct s_vars
 }	t_vars;
 
 int		exit_error(char *error_message);
-int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 int		mutex_array_init(pthread_mutex_t *mutex_array, int size);
 int		mutex_array_destroy(pthread_mutex_t *mutex_array, int size);
 long	read_long(long *value, pthread_mutex_t *mutex);
 void	write_long(long *value, long new_value, pthread_mutex_t *mutex);
-long	ft_getcurrenttime(void);
+long	ft_gettime(void);
 void	ft_usleep(long time);
 void	*philo_routine(void *void_philo);
 void	announce(char *message, t_philo *philo);

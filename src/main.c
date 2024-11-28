@@ -6,21 +6,20 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:35:06 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 08:46:51 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:56:13 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 static int	parse_input(int argc, char **argv, t_vars *vars)
 {
-	vars->number_of_philosophers = ft_atoi(argv[1]);
-	vars->time_to_die = ft_atoi(argv[2]) * 1000;
-	vars->time_to_eat = ft_atoi(argv[3]) * 1000;
-	vars->time_to_sleep = ft_atoi(argv[4]) * 1000;
+	vars->number_of_philosophers = ft_atol(argv[1]);
+	vars->time_to_die = ft_atol(argv[2]) * 1000;
+	vars->time_to_eat = ft_atol(argv[3]) * 1000;
+	vars->time_to_sleep = ft_atol(argv[4]) * 1000;
 	if (argc == 6)
-		vars->eat_times = ft_atoi(argv[5]);
+		vars->eat_times = ft_atol(argv[5]);
 	else
 		vars->eat_times = -1;
 	if (vars->number_of_philosophers < 1)

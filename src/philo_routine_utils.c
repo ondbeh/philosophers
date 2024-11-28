@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:09:56 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 10:01:38 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:05:11 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	announce(char *message, t_philo *philo)
 			&philo->vars->start_time_mutex);
 	is_finished = read_long(&philo->vars->is_finished,
 			&philo->vars->is_finished_mutex);
-	time = (ft_getcurrenttime() - start_time) / 1000;
+	time = (ft_gettime() - start_time) / 1000;
 	if (is_finished)
 		return ;
 	pthread_mutex_lock(&philo->vars->print_mutex);

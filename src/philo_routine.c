@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:48:45 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 10:01:41 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:53:24 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	philo_think(t_philo *philo)
 {
-	announce("is thinking", philo);
+	announce(THINK, philo);
 	if (philo->vars->number_of_philosophers % 2)
 		ft_usleep(philo->vars->time_to_eat / 10);
 }
@@ -29,9 +29,16 @@ static void	philo_eat(t_philo *philo)
 	id = philo->id - 1;
 	eat_count = read_long(&philo->eat_count, &vars->eat_count_mutex[id]);
 	pthread_mutex_lock(&vars->forks[philo->first_fork]);
+	announce(FORK, philo);
+	if (philo->first_fork == philo->second_fork)
+	{
+		ft_usleep(vars->time_to_die * 2);
+		return ;
+	}
 	pthread_mutex_lock(&vars->forks[philo->second_fork]);
-	announce("is eating", philo);
-	write_long(&philo->last_eat, ft_getcurrenttime(), &vars->last_eat_mutex[id]);
+	announce(FORK, philo);
+	announce(EAT, philo);
+	write_long(&philo->last_eat, ft_gettime(), &vars->last_eat_mutex[id]);
 	write_long(&philo->eat_count, eat_count + 1, &vars->eat_count_mutex[id]);
 	ft_usleep(vars->time_to_eat);
 	pthread_mutex_unlock(&vars->forks[philo->first_fork]);
@@ -40,7 +47,7 @@ static void	philo_eat(t_philo *philo)
 
 static void	philo_sleep(t_philo *philo)
 {
-	announce("is sleeping", philo);
+	announce(SLEEP, philo);
 	ft_usleep(philo->vars->time_to_sleep);
 }
 

@@ -4,7 +4,7 @@ NAME		=	philo
 # Compiler and flags
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -Wunreachable-code -pthread -I.
-DEBUG_FLAGS	=	-g  -fsanitize=thread -fcolor-diagnostics -fansi-escape-codes
+DEBUG_FLAGS	=	-g -fsanitize=thread -fcolor-diagnostics -fansi-escape-codes
 RM			=	rm -f
 INCLUDES	=	-I .
 
@@ -27,7 +27,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Compiling philo project"
 
-debug: $(OBJS)
+debug: fclean $(OBJS)
 	@$(CC) $(DEBUG_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Compiling philo project with debug flags"
 
