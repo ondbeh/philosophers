@@ -31,7 +31,7 @@ debug: fclean $(OBJS)
 	@$(CC) $(DEBUG_FLAGS) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Compiling philo project with debug flags"
 
-docekr: $(OBJS)
+docker: fclean $(OBJS)
 	@$(CC) -g $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "Compiling philo project with debug flags"
 

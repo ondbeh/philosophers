@@ -32,6 +32,7 @@ static void	philo_eat(t_philo *philo)
 	announce(FORK, philo);
 	if (philo->first_fork == philo->second_fork)
 	{
+		pthread_mutex_unlock(&vars->forks[philo->first_fork]);
 		ft_usleep(vars->time_to_die * 2);
 		return ;
 	}
