@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:35:06 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/27 15:04:22 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 08:46:51 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,5 @@ int	main(int argc, char **argv)
 	pthread_mutex_destroy(&vars.print_mutex);
 	pthread_mutex_destroy(&vars.is_finished_mutex);
 	pthread_mutex_destroy(&vars.start_time_mutex);
-	printf("All philosophers have eaten enough times\n");
-
 	return (0);
 }
