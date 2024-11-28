@@ -14,7 +14,7 @@ OBJ_DIR		=	obj
 
 # Source files and corresponding object files
 SRCS		=	main.c main_utils.c error_handler.c mutex_utils.c philo_routine.c philo_routine_utils.c \
-				observer_routine.c
+				observer_routine.c initialization.c
 
 SRCS		:=	$(addprefix $(SRC_DIR)/, $(SRCS))
 OBJS		=	$(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

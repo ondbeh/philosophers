@@ -6,11 +6,11 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:35:06 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 11:56:13 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:14:29 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 static int	parse_input(int argc, char **argv, t_vars *vars)
 {
@@ -31,35 +31,6 @@ static int	parse_input(int argc, char **argv, t_vars *vars)
 	if (argc == 6 && vars->eat_times < 0)
 		return (exit_error("Invalid number of times to eat"));
 	return (0);
-}
-
-void	initialize_vars(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	vars->start_time = 0;
-	vars->is_finished = 0;
-	while (i < vars->number_of_philosophers)
-	{
-		vars->philosophers[i].id = i + 1;
-		vars->philosophers[i].vars = vars;
-		vars->philosophers[i].last_eat = 0;
-		vars->philosophers[i].eat_count = 0;
-		if (i % 2 == 0)
-		{
-			vars->philosophers[i].first_fork = i;
-			vars->philosophers[i].second_fork = (i + 1)
-				% vars->number_of_philosophers;
-		}
-		else
-		{
-			vars->philosophers[i].first_fork = (i + 1)
-				% vars->number_of_philosophers;
-			vars->philosophers[i].second_fork = i;
-		}
-		++i;
-	}
 }
 
 int	create_threads(t_vars *vars)
@@ -88,24 +59,6 @@ int	create_threads(t_vars *vars)
 	return (0);
 }
 
-int	initialize(t_vars *vars)
-{
-	if (mutex_array_init(vars->forks, vars->number_of_philosophers))
-		return (exit_error("Failed to initialize fork mutex"));
-	if (mutex_array_init(vars->last_eat_mutex, vars->number_of_philosophers))
-		return (exit_error("Failed to initialize eat count mutex"));
-	if (mutex_array_init(vars->eat_count_mutex, vars->number_of_philosophers))
-		return (exit_error("Failed to initialize last eat mutex"));
-	if (pthread_mutex_init(&vars->print_mutex, NULL))
-		return (exit_error("Failed to initialize mutex"));
-	if (pthread_mutex_init(&vars->is_finished_mutex, NULL))
-		return (exit_error("Failed to initialize mutex"));
-	if (pthread_mutex_init(&vars->start_time_mutex, NULL))
-		return (exit_error("Failed to initialize mutex"));
-	initialize_vars(vars);
-	return (0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -117,12 +70,10 @@ int	main(int argc, char **argv)
 	if (initialize(&vars))
 		return (1);
 	if (create_threads(&vars))
-		return (1);
-	mutex_array_destroy(vars.forks, vars.number_of_philosophers);
-	mutex_array_destroy(vars.last_eat_mutex, vars.number_of_philosophers);
-	mutex_array_destroy(vars.eat_count_mutex, vars.number_of_philosophers);
-	pthread_mutex_destroy(&vars.print_mutex);
-	pthread_mutex_destroy(&vars.is_finished_mutex);
-	pthread_mutex_destroy(&vars.start_time_mutex);
+	{
+		write_long(&vars.is_finished, 1, &vars.is_finished_mutex);
+		write_long(&vars.start_time, 1, &vars.start_time_mutex);
+	}
+	clean_mutexes(&vars, (t_mutex_error){NONE, 0});
 	return (0);
 }

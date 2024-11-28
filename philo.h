@@ -6,7 +6,7 @@
 /*   By: obehavka <obehavka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:36:03 by obehavka          #+#    #+#             */
-/*   Updated: 2024/11/28 11:55:45 by obehavka         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:10:32 by obehavka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,26 @@ typedef struct s_vars
 	long				is_finished;
 }	t_vars;
 
+typedef enum e_mutex_type
+{
+	FORKS,
+	LAST_EAT,
+	EAT_COUNT,
+	PRINT,
+	IS_FINISHED,
+	START_TIME,
+	NONE
+}	t_mutex_type;
+
+typedef struct s_mutex_error
+{
+	t_mutex_type	type;
+	int				at;
+}	t_mutex_error;
+
 int		exit_error(char *error_message);
+int		initialize(t_vars *vars);
+int		clean_mutexes(t_vars *vars, t_mutex_error error);
 long	ft_atol(const char *str);
 int		mutex_array_init(pthread_mutex_t *mutex_array, int size);
 int		mutex_array_destroy(pthread_mutex_t *mutex_array, int size);
